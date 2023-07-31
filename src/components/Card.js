@@ -1,6 +1,8 @@
 import React from "react";
 
-function Card() {
+function Card(props) {
+  let options = props.options;
+  let priceOptions = Object.keys(options);
   return (
     <div>
       <div>
@@ -9,13 +11,14 @@ function Card() {
           style={{ width: "18rem", maxHeight: "360px" }}
         >
           <img
-            src="https://media.istockphoto.com/id/1186759790/photo/paneer-tikka-at-skewers-in-black-bowl-at-dark-slate-background-paneer-tikka-is-an-indian.jpg?s=1024x1024&w=is&k=20&c=igLMceJMT8yxs7yTfIrWAUehgbBzqtvvxEuflgj34PM="
+            src={props.imgSrc}
             className="card-img-top"
             alt="..."
+            style={{ height: "200px", objectFit: "fill" }}
           />
           <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">Some quick example text to build.</p>
+            <h5 className="card-title">{props.foodName}</h5>
+
             <div className="container w-100">
               <select className="m-2 h-100 bg-success rounded">
                 {Array.from(Array(6), (e, i) => {
@@ -27,8 +30,13 @@ function Card() {
                 })}
               </select>
               <select className="m-2 h-100 bg-success rounded">
-                <option value="half">Half</option>
-                <option value="full">Full</option>
+                {priceOptions.map((data) => {
+                  return (
+                    <option key={data} value={data}>
+                      {data}
+                    </option>
+                  );
+                })}
               </select>
               <div className="d-inline h-100 fs-5">Total Price:</div>
             </div>
